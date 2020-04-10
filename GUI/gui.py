@@ -55,13 +55,13 @@ Entry_C.place(x=465, y=400)
 
 # Entry for time interval for taking data, with label
 label_deltaT = tk.Label(text="Time Interval (Δt) =", width=20, relief="raised", bg="#CAF1FA")
-Entry_deltaT = tk.Entry(root, bd=2, width=10, justify="center")
+Entry_deltaT = tk.Entry(root, bd=2, width=10, justify="center", state="disabled")
 label_deltaT.place(x=205, y=520)
 Entry_deltaT.place(x=350, y=520)
 
 # Entry for maximum time for taking data, with label
 label_maxT = tk.Label(text="Maximum Time =", width=20, relief="raised", bg="#CAF1FA")
-Entry_maxT = tk.Entry(root, bd=2, width=10, justify="center")
+Entry_maxT = tk.Entry(root, bd=2, width=10, justify="center", state="disabled")
 label_maxT.place(x=205, y=540)
 Entry_maxT.place(x=350, y=540)
 
@@ -80,14 +80,24 @@ def start_Calculation():
         R3 = float(Entry_R3.get())
         R4 = float(Entry_R4.get())
         C = float(Entry_C.get())
-        deltaT = float(Entry_deltaT.get())
-        maxT = float(Entry_maxT.get())
 
+        # only take deltaT and maxT when in transient mode
+        if(mode.get() == 2):
+            deltaT = float(Entry_deltaT.get())
+            maxT = float(Entry_maxT.get())
+
+        
         # if the value for everything except the voltage source is <= 0, show error message
-        if((R1 <= 0) or (R2 <= 0) or (R3 <= 0) or (R4 <= 0) or (C <= 0) or (deltaT <= 0) or (maxT <= 0)):
-            tkinter.messagebox.showinfo("ERROR", "Ada nilai yang salah! Coba masukkan kembali nilai-nilai yang diinginkan!")
+        if((R1 <= 0) or (R2 <= 0) or (R3 <= 0) or (R4 <= 0) or (C <= 0)):
+            # if transient mode, check extra parameters
+            if(mode.get() == 2):
+                if((deltaT <= 0) or (maxT <= 0)):
+                    tkinter.messagebox.showinfo("ERROR", "Ada nilai yang salah! Coba masukkan kembali nilai-nilai yang diinginkan!")
+            else:
+                tkinter.messagebox.showinfo("ERROR", "Ada nilai yang salah! Coba masukkan kembali nilai-nilai yang diinginkan!")
+            
         else:
-            # enable result & restart buttons
+            # enable result buttons
             button_V1.config(state="active")
             button_V2.config(state="active")
             button_V3.config(state="active")
@@ -169,6 +179,15 @@ def freeze_Button():
     button_I3.config(state="disabled")
     button_I4.config(state="disabled")
     button_Ic.config(state="disabled")
+
+    # if dc analysis, doesn't need deltaT or maxT
+    if(mode.get()==1):
+        Entry_deltaT.config(state="disabled")
+        Entry_maxT.config(state="disabled")
+    else:
+        Entry_deltaT.config(state="normal")
+        Entry_maxT.config(state="normal")
+
 
 #############################################################################################################
 
