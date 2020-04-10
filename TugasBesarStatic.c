@@ -47,14 +47,15 @@ void getTracking(double V, double R1, double R2, double R3, double R4, double C,
         // Open File External
         FILE* fp;
         fp = fopen("HasilTracking.txt", "w");
-        printf("\nMencetak ke File...\n");
+        printf("Mencetak ke File...\n");
         fprintf(fp,"HASIL SIMULASI OP\n");
-        fprintf(fp,"time \tV1 \tV2 \tV3 \tV4 \tI1 \tI2 \tI3 \tI4 \tIc\n");
+        fprintf(fp,"V1 \tV2 \tV3 \tV4 \tI1 \tI2 \tI3 \tI4 \tIc\n");
 
         // Print value
-        fprintf(fp, "%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f\n",
-                    t, V1, V2, V3, V4, I1, I2, I3, I4, Ic);
+        fprintf(fp, "%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f \t%.4f\n",
+                    V1, V2, V3, V4, I1, I2, I3, I4, Ic);
 
+        printf("Pencetakan selesai");
         // Close File External
         fclose(fp);
 
@@ -113,7 +114,7 @@ int main (void)
     double R3 = 1;
     double R4 = 1;
     double C  = 1;
-    int ModeSimulasi = 2;
+    int ModeSimulasi = 1;
     double tMax = 1;
     double inc = 0.1;
 
