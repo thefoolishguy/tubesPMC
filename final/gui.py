@@ -266,7 +266,7 @@ def show_I3():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan I3               ", "I2 = " + str(dataBase.iloc[0]['I3']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I3               ", "I3 = " + str(dataBase.iloc[0]['I3']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'I3')
@@ -284,7 +284,7 @@ def show_I4():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan I4               ", "I2 = " + str(dataBase.iloc[0]['I4']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I4               ", "I4 = " + str(dataBase.iloc[0]['I4']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'I4')
@@ -302,7 +302,7 @@ def show_Ic():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan Ic               ", "I2 = " + str(dataBase.iloc[0]['Ic']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan Ic               ", "Ic = " + str(dataBase.iloc[0]['Ic']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'Ic')
