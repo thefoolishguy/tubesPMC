@@ -2,7 +2,7 @@
 
 /* Bentuk rangkaian sebagai berikut
             R1   V2    R3    V3
-       V5|-===---|-----===----|
+       V1|-===---|-----===----|
          |      | |           |
          |      | | R2       | |
         _|_      |         R4| |
