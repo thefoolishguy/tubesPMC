@@ -18,6 +18,11 @@
 #include<stdlib.h>
 #include<string.h>
 
+void importCheck()
+{
+    printf ("Library is imported !.");
+}
+
 void getTracking(double V, double R1, double R2, double R3, double R4, double C, int ModeSimulasi, double tMax, double inc)
 {
     /* DEKLARASI VARIABEL */
@@ -63,7 +68,7 @@ void getTracking(double V, double R1, double R2, double R3, double R4, double C,
     {  // Mode Transiens
 
        // Hitung panjang alokasi memori
-       int nElemen = ((int)(tMax/inc)+1);
+       int nElemen = (int)floor(tMax/inc);
 
         // Perhitungan
         Tau = (((R1 * (R3 + R4))/(R1 + R3 + R4)) + R2)*C;
@@ -114,9 +119,9 @@ int main (void)
     double R3 = 1;
     double R4 = 1;
     double C  = 1;
-    int ModeSimulasi = 1;
+    int ModeSimulasi = 2;
     double tMax = 1;
-    double inc = 0.1;
+    double inc = 0.6;
 
     getTracking(V, R1, R2, R3, R4, C, ModeSimulasi, tMax, inc);
 
