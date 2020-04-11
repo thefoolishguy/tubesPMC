@@ -1,6 +1,9 @@
 import tkinter as tk
 import tkinter.messagebox
 from PIL import Image, ImageTk
+from ctypes import *
+import matplotlib.pyplot as plt
+import pandas as pd
 
 ########################### MAKE THE BASE WINDOW ################################
 
@@ -14,8 +17,11 @@ root.title("Tugas Besar PMC - Analisis Rangkaian")
 root.geometry("1278x609")
 root.resizable(False, False) # make the window unresizable
 
+# set icon
+root.iconbitmap("./resistor_icon.ico")
+
 # insert background image name to a variable
-im = Image.open("rangkaian_tubes.png")
+im = Image.open("./rangkaian_tubes.png")
 im = im.resize((1278, 609)) # resize to fit the window
 background_image = ImageTk.PhotoImage(im)
 
@@ -24,6 +30,14 @@ background_label = tk.Label(root, image=background_image)
 
 # put the image label at the corner left
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+# create label for the member's names + NIM
+member_title_label = tk.Label(root, text="Kelompok 11", font=("Helvetica", 15, "bold"), bg="white", justify="left", padx=15)
+member_title_label.pack(anchor="nw")
+
+member_label = tk.Label(root, text="Agung Dwi Laksana (13218034)\nMatthew Ryo Kianijaya (13218035)\nChyndi Octavia Devi (13218039)\nAmelia Khoirurrahma(18318003)",
+                        bg="white", font=("Helvetica", 12), justify="left", padx=15)
+member_label.pack(anchor="nw")
 
 #################################################################################
 
@@ -108,65 +122,183 @@ def start_Calculation():
             button_I4.config(state="active")
             button_Ic.config(state="active")
 
+            # if it's dc analysis, make maxT and deltaT = 0 to avoid error
+            if(mode.get() == 1):
+                maxT = 0
+                deltaT = 0
+
             # do the C procedure to produce the external file
+            so_file = "./TugasBesarStatic.so"
+            calc_function = cdll.LoadLibrary(so_file)
+            
+            calc_function.getTracking.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double, c_int, c_double, c_double]
+            calc_function.getTracking(Vs, R1, R2, R3, R4, C, mode.get(), maxT, deltaT)    
             
     # if the value is inserted incorrectly, show error message
     except ValueError:
         tkinter.messagebox.showinfo("ERROR", "Ada nilai yang salah! Coba masukkan kembali nilai-nilai yang diinginkan!")
 
 def show_V1():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-V1")
+        tkinter.messagebox.showinfo("Hasil Perhitungan V1               ", "V1 = " + str(dataBase.iloc[0]['V1']) + " [V]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-V1")
+        dataBase.plot(x = 'time', y = 'V1')
+        plt.ylim(0, 1.1*maxV)
+        plt.xlim(0)
+        plt.title('Plot Tegangan V1 Terhadap Waktu (V)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("V1 (V)")
+        plt.show()
 
 def show_V2():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-V2")
+        tkinter.messagebox.showinfo("Hasil Perhitungan V2               ", "V2 = " + str(dataBase.iloc[0]['V2']) + " [V]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-V2")
+        dataBase.plot(x = 'time', y = 'V2')
+        plt.ylim(0, 1.1*maxV)
+        plt.xlim(0)
+        plt.title('Plot Tegangan V2 Terhadap Waktu (V)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("V2 (V)")
+        plt.show()
 
 def show_V3():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-V3")
+        tkinter.messagebox.showinfo("Hasil Perhitungan V3               ", "V3 = " + str(dataBase.iloc[0]['V3']) + " [V]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-V3")
+        dataBase.plot(x = 'time', y = 'V3')
+        plt.ylim(0, 1.1*maxV)
+        plt.xlim(0)
+        plt.title('Plot Tegangan V3 Terhadap Waktu (V)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("V3 (V)")
+        plt.show()
 
 def show_V4():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-V4")
+        tkinter.messagebox.showinfo("Hasil Perhitungan V4               ", "V4 = " + str(dataBase.iloc[0]['V4']) + " [V]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-V4")
+        dataBase.plot(x = 'time', y = 'V4')
+        plt.ylim(0, 1.1*maxV)
+        plt.xlim(0)
+        plt.title('Plot Tegangan V4 Terhadap Waktu (V)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("V4 (V)")
+        plt.show()
 
 def show_I1():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-I1")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I1               ", "I1 = " + str(dataBase.iloc[0]['I1']) + " [A]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-I1")
+        dataBase.plot(x = 'time', y = 'I1')
+        plt.ylim(0, 1.1*maxI)
+        plt.xlim(0)
+        plt.title('Plot Arus I1 Terhadap Waktu (A)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("I1 (A)")
+        plt.show()
 
 def show_I2():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-I2")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I2               ", "I2 = " + str(dataBase.iloc[0]['I2']) + " [A]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-I2")
+        dataBase.plot(x = 'time', y = 'I2')
+        plt.ylim(0, 1.1*maxI)
+        plt.xlim(0)
+        plt.title('Plot Arus I2 Terhadap Waktu (A)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("I2 (A)")
+        plt.show()
 
 def show_I3():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-I3")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I3               ", "I2 = " + str(dataBase.iloc[0]['I3']) + " [A]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-I3")
+        dataBase.plot(x = 'time', y = 'I3')
+        plt.ylim(0, 1.1*maxI)
+        plt.xlim(0)
+        plt.title('Plot Arus I3 Terhadap Waktu (A)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("I3 (A)")
+        plt.show()
 
 def show_I4():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-I4")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I4               ", "I2 = " + str(dataBase.iloc[0]['I4']) + " [A]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-I4")
+        dataBase.plot(x = 'time', y = 'I4')
+        plt.ylim(0, 1.1*maxI)
+        plt.xlim(0)
+        plt.title('Plot Arus I4 Terhadap Waktu (A)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("I4 (A)")
+        plt.show()
 
 def show_Ic():
+    dataBase = pd.read_csv("./HasilTracking.txt", delimiter=" \t", engine="python", skiprows=1)
+    maxV =  dataBase.iloc[0]['V1']
+    maxI =  dataBase.iloc[0]['I1']
+
+    # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        print("1-Ic")
+        tkinter.messagebox.showinfo("Hasil Perhitungan Ic               ", "I2 = " + str(dataBase.iloc[0]['Ic']) + " [A]")
+    # if transient analysis, plot the graph and show it
     else:
-        print("2-Ic")
+        dataBase.plot(x = 'time', y = 'Ic')
+        plt.ylim(0, 1.1*maxI)
+        plt.xlim(0)
+        plt.title('Plot Arus Ic Terhadap Waktu (A)')
+        plt.xlabel("Waktu (s)")
+        plt.ylabel("Ic (A)")
+        plt.show()
 
 # Function to disable all result buttons
 def freeze_Button():
