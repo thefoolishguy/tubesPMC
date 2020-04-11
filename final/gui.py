@@ -35,7 +35,7 @@ background_label.place(x=0, y=0, relwidth=1, relheight=1)
 member_title_label = tk.Label(root, text="Kelompok 11", font=("Helvetica", 15, "bold"), bg="white", justify="left", padx=15)
 member_title_label.pack(anchor="nw")
 
-member_label = tk.Label(root, text="Agung Dwi Laksana (13218034)\nMatthew Ryo Kianijaya (13218035)\nChyndi Octavia Devi (13218039)\nAmelia Khoirurrahma(18318003)",
+member_label = tk.Label(root, text="Agung Dwi Laksana (13218034)\nMatthew Ryo Kianijaya (13218035)\nChyndi Octavia Devi (13218039)\nAmelia Khoirurrahma (18318003)",
                         bg="white", font=("Helvetica", 12), justify="left", padx=15)
 member_label.pack(anchor="nw")
 
@@ -43,38 +43,51 @@ member_label.pack(anchor="nw")
 
 ############################ MAKE ENTRIES FOR INPUT ############################
 
-# Entry for Voltage Source Vs
+# Entry for Voltage Source Vs + Unit Label
 Entry_Vs = tk.Entry(root, bd=5, width=10, justify="center")
 Entry_Vs.place(x=245, y=300)
+label_Vs = tk.Label(root, text="V", font=("Helvetica", 10, "bold"), bg="white")
+label_Vs.place(x=320, y=300)
 
-# Entry for Resistor R1
+
+# Entry for Resistor R1 + Unit Label
 Entry_R1 = tk.Entry(root, bd=5, width=10, justify="center")
 Entry_R1.place(x=290, y=205)
+label_R1 = tk.Label(root, text="Ω", font=("Helvetica", 10, "bold"), bg="white")
+label_R1.place(x=365, y=205)
 
-# Entry for Resistor R2
+# Entry for Resistor R2 + Unit Label
 Entry_R2 = tk.Entry(root, bd=5, width=10, justify="center")
 Entry_R2.place(x=525, y=205)
+label_R2 = tk.Label(root, text="Ω", font=("Helvetica", 10, "bold"), bg="white")
+label_R2.place(x=600, y=205)
 
-# Entry for Resistor R3
+# Entry for Resistor R3 + Unit Label
 Entry_R3 = tk.Entry(root, bd=5, width=10, justify="center")
 Entry_R3.place(x=465, y=285)
+label_R3 = tk.Label(root, text="Ω", font=("Helvetica", 10, "bold"), bg="white")
+label_R3.place(x=540, y=285)
 
-# Entry for Resistor R4
+# Entry for Resistor R4 + Unit Label
 Entry_R4 = tk.Entry(root, bd=5, width=10, justify="center")
 Entry_R4.place(x=672, y=333)
+label_R4 = tk.Label(root, text="Ω", font=("Helvetica", 10, "bold"), bg="white")
+label_R4.place(x=747, y=333)
 
-# Entry for Capacitor C
+# Entry for Capacitor C + Unit Label
 Entry_C = tk.Entry(root, bd=5, width=10, justify="center")
 Entry_C.place(x=465, y=400)
+label_C = tk.Label(root, text="F", font=("Helvetica", 10, "bold"), bg="white")
+label_C.place(x=540, y=400)
 
 # Entry for time interval for taking data, with label
-label_deltaT = tk.Label(text="Time Interval (Δt) =", width=20, relief="raised", bg="#CAF1FA")
+label_deltaT = tk.Label(text="Time Interval (s) =", width=20, relief="raised", bg="#CAF1FA")
 Entry_deltaT = tk.Entry(root, bd=2, width=10, justify="center", state="disabled")
 label_deltaT.place(x=205, y=520)
 Entry_deltaT.place(x=350, y=520)
 
 # Entry for maximum time for taking data, with label
-label_maxT = tk.Label(text="Maximum Time =", width=20, relief="raised", bg="#CAF1FA")
+label_maxT = tk.Label(text="Maximum Time (s) =", width=20, relief="raised", bg="#CAF1FA")
 Entry_maxT = tk.Entry(root, bd=2, width=10, justify="center", state="disabled")
 label_maxT.place(x=205, y=540)
 Entry_maxT.place(x=350, y=540)
