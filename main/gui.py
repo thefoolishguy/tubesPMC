@@ -58,15 +58,15 @@ label_R1.place(x=365, y=205)
 
 # Entry for Resistor R2 + Unit Label
 Entry_R2 = tk.Entry(root, bd=5, width=10, justify="center")
-Entry_R2.place(x=525, y=205)
+Entry_R2.place(x=465, y=285)
 label_R2 = tk.Label(root, text="Ω", font=("Helvetica", 10, "bold"), bg="white")
-label_R2.place(x=600, y=205)
+label_R2.place(x=540, y=285)
 
 # Entry for Resistor R3 + Unit Label
 Entry_R3 = tk.Entry(root, bd=5, width=10, justify="center")
-Entry_R3.place(x=465, y=285)
+Entry_R3.place(x=525, y=205)
 label_R3 = tk.Label(root, text="Ω", font=("Helvetica", 10, "bold"), bg="white")
-label_R3.place(x=540, y=285)
+label_R3.place(x=600, y=205)
 
 # Entry for Resistor R4 + Unit Label
 Entry_R4 = tk.Entry(root, bd=5, width=10, justify="center")
@@ -230,15 +230,15 @@ def show_I1():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan I1               ", "I1 = " + str(dataBase.iloc[0]['I1']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I(R1)               ", "I(R1) = " + str(dataBase.iloc[0]['I1']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'I1')
         plt.ylim(0, 1.1*maxI)
         plt.xlim(0)
-        plt.title('Plot Arus I1 Terhadap Waktu (A)')
+        plt.title('Plot Arus I(R1) Terhadap Waktu (A)')
         plt.xlabel("Waktu (s)")
-        plt.ylabel("I1 (A)")
+        plt.ylabel("I(R1) (A)")
         plt.show()
 
 def show_I2():
@@ -248,15 +248,15 @@ def show_I2():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan I2               ", "I2 = " + str(dataBase.iloc[0]['I2']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I(R2)               ", "I(R2) = " + str(dataBase.iloc[0]['I2']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'I2')
         plt.ylim(0, 1.1*maxI)
         plt.xlim(0)
-        plt.title('Plot Arus I2 Terhadap Waktu (A)')
+        plt.title('Plot Arus I(R2) Terhadap Waktu (A)')
         plt.xlabel("Waktu (s)")
-        plt.ylabel("I2 (A)")
+        plt.ylabel("I(R2) (A)")
         plt.show()
 
 def show_I3():
@@ -266,15 +266,15 @@ def show_I3():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan I3               ", "I3 = " + str(dataBase.iloc[0]['I3']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I(R3)               ", "I(R3) = " + str(dataBase.iloc[0]['I3']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'I3')
         plt.ylim(0, 1.1*maxI)
         plt.xlim(0)
-        plt.title('Plot Arus I3 Terhadap Waktu (A)')
+        plt.title('Plot Arus I(R3) Terhadap Waktu (A)')
         plt.xlabel("Waktu (s)")
-        plt.ylabel("I3 (A)")
+        plt.ylabel("I(R3) (A)")
         plt.show()
 
 def show_I4():
@@ -284,15 +284,15 @@ def show_I4():
 
     # if DC analysis, the result is only on the 1st row
     if(mode.get() == 1):
-        tkinter.messagebox.showinfo("Hasil Perhitungan I4               ", "I4 = " + str(dataBase.iloc[0]['I4']) + " [A]")
+        tkinter.messagebox.showinfo("Hasil Perhitungan I(R4)               ", "I(R4) = " + str(dataBase.iloc[0]['I4']) + " [A]")
     # if transient analysis, plot the graph and show it
     else:
         dataBase.plot(x = 'time', y = 'I4')
         plt.ylim(0, 1.1*maxI)
         plt.xlim(0)
-        plt.title('Plot Arus I4 Terhadap Waktu (A)')
+        plt.title('Plot Arus I(R4) Terhadap Waktu (A)')
         plt.xlabel("Waktu (s)")
-        plt.ylabel("I4 (A)")
+        plt.ylabel("I(R4) (A)")
         plt.show()
 
 def show_Ic():
@@ -353,16 +353,16 @@ button_V3.place(x=900, y=240)
 button_V4 = tk.Button(root, text="V4", font=("Helvetica", 12, "bold"), command=show_V4, width=31, state="disabled")
 button_V4.place(x=900, y=275)
 
-button_I1 = tk.Button(root, text="I1", font=("Helvetica", 12, "bold"), command=show_I1, width=31, state="disabled")
+button_I1 = tk.Button(root, text="I(R1)", font=("Helvetica", 12, "bold"), command=show_I1, width=31, state="disabled")
 button_I1.place(x=900, y=310)
 
-button_I2 = tk.Button(root, text="I2", font=("Helvetica", 12, "bold"), command=show_I2, width=31, state="disabled")
+button_I2 = tk.Button(root, text="I(R2)", font=("Helvetica", 12, "bold"), command=show_I2, width=31, state="disabled")
 button_I2.place(x=900, y=345)
 
-button_I3 = tk.Button(root, text="I3", font=("Helvetica", 12, "bold"), command=show_I3, width=31, state="disabled")
+button_I3 = tk.Button(root, text="I(R3)", font=("Helvetica", 12, "bold"), command=show_I3, width=31, state="disabled")
 button_I3.place(x=900, y=380)
 
-button_I4 = tk.Button(root, text="I4", font=("Helvetica", 12, "bold"), command=show_I4, width=31, state="disabled")
+button_I4 = tk.Button(root, text="I(R4)", font=("Helvetica", 12, "bold"), command=show_I4, width=31, state="disabled")
 button_I4.place(x=900, y=415)
 
 button_Ic = tk.Button(root, text="Ic", font=("Helvetica", 12, "bold"), command=show_Ic, width=31, state="disabled")
